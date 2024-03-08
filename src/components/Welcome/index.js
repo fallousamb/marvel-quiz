@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth, user } from '../Firebase/firebaseConfig'
 import { useNavigate } from 'react-router-dom'
 import { getDoc } from 'firebase/firestore'
+import Loader from '../Loader'
 
 const Welcome = () => {
 
@@ -37,13 +38,16 @@ const Welcome = () => {
 
     return listener;
       
-  }, [userSession])
+  }, [userSession, navigate])
 
   return userSession === null 
   ? (
     <Fragment>
       <div className="loader"></div>
-      <p className="loaderText">Loading...</p>
+      <Loader 
+        loadingMsg={'Autentification...'}
+        styling={{textAlign: 'center', color: '#FFFFFF'}} 
+      />
     </Fragment>
   ) 
   : (

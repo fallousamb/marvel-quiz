@@ -2,6 +2,7 @@ import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react'
 import { auth } from '../Firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
+import { Tooltip } from 'react-tooltip';
 
 const Logout = () => {
 
@@ -20,17 +21,22 @@ const Logout = () => {
                 console.log('Oups, nous avons une erreur');
             })
         }
-    }, [checked])
+    }, [checked, navigate])
 
     const handleChange = e => {
         setChecked(e.target.checked);
     }
     return (
         <div className='logoutContainer'>
-        <label className="switch">
-            <input type='checkbox' checked={ checked } onChange={handleChange}/>
-            <span className="slider round" datatype='Déconnexion'></span>
-        </label>
+            <label className="switch">
+                <input type='checkbox' checked={ checked } onChange={handleChange}/>
+                <span className="slider round"
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="Déconnexion">
+
+                </span>
+            </label>
+            <Tooltip id="my-tooltip" place='left' effect='solid'/>
         </div>
     )
 }
